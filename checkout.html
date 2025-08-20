@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout • Aurora Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .checkout{max-width:1000px;margin:1rem auto;padding:0 1rem}
+      .crumbs{margin:.75rem 0}
+      .checkout-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
+      .pane{border:1px solid var(--stroke);border-radius:16px;background:var(--bg-elev);box-shadow:var(--shadow)}
+      .pane header{padding:1rem;border-bottom:1px solid var(--stroke);display:flex;align-items:center;justify-content:space-between}
+      .pane .body{padding:1rem}
+      .summary-row{display:flex;justify-content:space-between;margin:.25rem 0}
+      .pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+      .pay-methods .opt{border:1px solid var(--stroke);border-radius:12px;padding:.6rem .8rem;cursor:pointer;display:flex;align-items:center;gap:.5rem}
+      .address-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+      .address-grid input{width:100%}
+      .muted{color:var(--muted)}
+      @media (max-width: 900px){.checkout-grid{grid-template-columns:1fr}}
+    </style>
+  </head>
+  <body>
+    <div class="checkout">
+      <div class="crumbs muted"><a href="./index.html" class="muted">← Back to shop</a></div>
+      <div class="checkout-grid">
+        <section class="pane">
+          <header>
+            <h2>Delivery address</h2>
+          </header>
+          <div class="body">
+            <form id="addressForm" class="address-grid">
+              <input class="input" name="fullName" placeholder="Full name" required />
+              <input class="input" name="phone" placeholder="Phone" required />
+              <input class="input" name="line1" placeholder="Address line 1" required style="grid-column:1/3" />
+              <input class="input" name="line2" placeholder="Address line 2 (optional)" style="grid-column:1/3" />
+              <input class="input" name="city" placeholder="City" required />
+              <input class="input" name="pincode" placeholder="PIN code" required />
+              <input class="input" name="state" placeholder="State" required />
+              <input class="input" name="country" placeholder="Country" required value="India" />
+            </form>
+          </div>
+        </section>
+
+        <aside class="pane">
+          <header>
+            <h2>Order summary</h2>
+          </header>
+          <div class="body">
+            <div id="orderItems" class="muted" style="margin-bottom:.5rem"></div>
+            <div class="summary-row"><span class="muted">Subtotal</span><strong id="sumSubtotal">₹0</strong></div>
+            <div class="summary-row"><span class="muted">Shipping</span><strong id="sumShipping">₹0</strong></div>
+            <div class="summary-row"><span class="muted">Tax</span><strong id="sumTax">₹0</strong></div>
+            <hr style="border-color:var(--stroke);border-width:1px 0 0;margin:.6rem 0">
+            <div class="summary-row"><span>Total</span><strong id="sumTotal">₹0</strong></div>
+            <div style="margin-top:1rem">
+              <div class="muted" style="margin-bottom:.4rem">Payment method</div>
+              <div class="pay-methods" id="payMethods">
+                <label class="opt"><input type="radio" name="pay" value="card" checked> Card</label>
+                <label class="opt"><input type="radio" name="pay" value="upi"> UPI</label>
+                <label class="opt"><input type="radio" name="pay" value="cod"> Cash on Delivery</label>
+              </div>
+            </div>
+            <button id="placeOrder" class="btn btn-primary" style="width:100%;margin-top:1rem">Place order</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script src="./checkout.js" defer></script>
+  </body>
+  
+</html>
+
+

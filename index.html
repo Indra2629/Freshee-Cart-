@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Freshee Cart • Fresh picks for campus life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <noscript>
+      Freshee Cart requires JavaScript to run. Please enable JavaScript in your browser.
+    </noscript>
+
+    <div class="bg-ornaments" aria-hidden="true"></div>
+
+    <header class="app-header glass" role="banner">
+      <div class="brand" role="img" aria-label="Freshee Cart">
+        <span class="logo" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="var(--primary)" />
+                <stop offset="100%" stop-color="var(--accent)" />
+              </linearGradient>
+            </defs>
+            <g stroke="url(#g1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+              <path d="M3 5h2l2 9h9.5l2-6H7.2"/>
+              <circle cx="10" cy="19" r="1.6" fill="url(#g1)" stroke="none"/>
+              <circle cx="17" cy="19" r="1.6" fill="url(#g1)" stroke="none"/>
+              <path d="M14.5 3.5c1.8 0 3 1.2 3.2 3-1.8 0-3-1.2-3.2-3Z" fill="url(#g1)" stroke="none"/>
+              <path d="M14.5 3.5c-.6.8-1 1.6-1.1 2.6"/>
+            </g>
+          </svg>
+        </span>
+        <span class="title">Freshee Cart</span>
+      </div>
+
+      <div class="search-bar" role="search">
+        <input id="searchInput" class="input" placeholder="Search products, brands…" type="search" autocomplete="off" aria-label="Search products" />
+      </div>
+
+      <nav class="header-actions" aria-label="Primary">
+        <button id="themeToggle" class="btn btn-ghost icon-btn" aria-pressed="false" aria-label="Toggle theme">
+          <span class="icon" aria-hidden="true">🌗</span>
+        </button>
+        <button id="wishlistBtn" class="btn btn-ghost icon-btn" aria-label="Wishlist">
+          <span class="icon" aria-hidden="true">❤</span>
+          <span id="wishlistCount" class="badge" aria-live="polite">0</span>
+        </button>
+        <button id="cartBtn" class="btn btn-primary icon-btn" aria-label="Open cart" aria-haspopup="dialog">
+          <span class="icon" aria-hidden="true">🛒</span>
+          <span id="cartCount" class="badge" aria-live="polite">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <section class="hero glass" aria-labelledby="heroTitle">
+      <div class="hero-content">
+        <h1 id="heroTitle">Freshee Cart</h1>
+        <p class="muted">Fresh picks for campus life · Gear up, stay fresh.</p>
+        <div class="hero-cta">
+          <button id="exploreBtn" class="btn btn-primary">Explore collections</button>
+          <button id="surpriseBtn" class="btn btn-ghost">Surprise me ✨</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="C:\Users\Indra\Desktop\shopping app\1.webp" alt="Freshee Cart hero" />
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Product filters">
+      <div class="controls-left">
+        <label class="sr-only" for="categoryFilter">Category</label>
+        <select id="categoryFilter" class="select">
+          <option value="all">All categories</option>
+        </select>
+
+        <div class="price-filter">
+          <label for="priceRange">Max price</label>
+          <input id="priceRange" type="range" min="0" max="1000000" step="10" />
+          <span id="priceRangeLabel" class="muted">₹0</span>
+        </div>
+      </div>
+      <div class="controls-right">
+        <label class="sr-only" for="sortBy">Sort by</label>
+        <select id="sortBy" class="select">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating-desc">Rating</option>
+          <option value="newest">Newest</option>
+        </select>
+        <button id="clearFilters" class="btn btn-ghost">Clear</button>
+      </div>
+    </section>
+
+    <main id="main" class="main" role="main">
+      <div id="productsGrid" class="products-grid" aria-live="polite"></div>
+    </main>
+
+    <aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+      <div class="cart-panel glass">
+        <header class="cart-header">
+          <h2 id="cartTitle">Your cart</h2>
+          <button id="closeCart" class="icon-btn btn-ghost" aria-label="Close cart">✕</button>
+        </header>
+        <div id="cartItems" class="cart-items" tabindex="0"></div>
+        <footer class="cart-footer">
+          <div class="summary">
+            <span class="muted">Subtotal</span>
+            <strong id="cartSubtotal">₹0.00</strong>
+          </div>
+          <button id="checkoutBtn" class="btn btn-primary">Checkout</button>
+        </footer>
+      </div>
+    </aside>
+    <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+
+    <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-content glass">
+        <header class="modal-header">
+          <h3 id="modalTitle">Product</h3>
+          <button id="closeModal" class="icon-btn btn-ghost" aria-label="Close">✕</button>
+        </header>
+        <div id="modalBody" class="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <footer class="footer">
+      <span class="muted">© <span id="year"></span> Freshee Cart. Built with vanilla JS.</span>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+  
+</html>
+
+
